@@ -1,3 +1,30 @@
+Explaination:
+
+Scenario:
+1. Grid Representation:
+The floor of the isolation ward is divided into a grid with coordinates like a graph.
+The bottom-left corner of the grid is (0, 0), and the top-right corner is specified in the input (e.g., (5, 5)).
+
+2. Robot's Initial Position:
+The robot starts at a specific position on the grid, given as (x, y) coordinates.
+It also has a direction it is facing:
+N = North (upwards),
+E = East (right),
+S = South (downwards),
+W = West (left).
+ 
+3. Robot's Navigation:
+The robot is controlled using a sequence of commands:
+L: Turn 90° left (without moving).
+R: Turn 90° right (without moving).
+M: Move forward in the current direction by one grid point.
+
+4. Boundaries:
+The robot must stay within the grid boundaries. If a move would take it outside the grid, it ignores that move.
+
+5. Goal:
+Process the commands and determine the final position and direction of the robot.
+
 import java.util.Scanner;
  
 public class RobotNavigator {
@@ -79,3 +106,4 @@ public class RobotNavigator {
         return new int[] {x, y};
     }
 }
+
