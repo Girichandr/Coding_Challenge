@@ -1,0 +1,81 @@
+import java.util.Scanner;
+ 
+public class RobotNavigator {
+    public static void main(String[] args) {
+      
+        Scanner scanner = new Scanner(System.in);
+ 
+        // Read the grid dimensions
+        String[] gridInput = scanner.nextLine().split(" ");
+        int maxX = Integer.parseInt(gridInput[0]);
+        int maxY = Integer.parseInt(gridInput[1]);
+ 
+        // Read the robot's initial position and orientation
+        String[] robotInput = scanner.nextLine().split(" ");
+        int x = Integer.parseInt(robotInput[0]);
+        int y = Integer.parseInt(robotInput[1]);
+        char direction = robotInput[2].charAt(0);
+ 
+        // Read the navigation instructions
+        String instructions = scanner.nextLine();
+ 
+        // Process each instruction
+        for (char instruction : instructions.toCharArray()) {
+            if (instruction == 'L') {
+                direction = turnLeft(direction);
+            } else if (instruction == 'R') {
+                direction = turnRight(direction);
+            } else if (instruction == 'M') {
+                int[] newPosition = move(x, y, direction, maxX, maxY);
+                x = newPosition[0];
+                y = newPosition[1];
+            }
+        }
+ 
+        // Print the final position and orientation
+        System.out.println(x + " " + y + " " + direction);
+ 
+        scanner.close();
+    }
+ 
+    // Method to turn the robot left
+    private static char turnLeft(char direction) {
+        switch (direction) {
+            case 'N': return 'W';
+            case 'W': return 'S';
+            case 'S': return 'E';
+            case 'E': return 'N';
+        }
+        return direction;
+    }
+ 
+    // Method to turn the robot right
+    private static char turnRight(char direction) {
+        switch (direction) {
+            case 'N': return 'E';
+            case 'E': return 'S';
+            case 'S': return 'W';
+            case 'W': return 'N';
+        }
+        return direction;
+    }
+ 
+    // Method to move the robot forward
+    private static int[] move(int x, int y, char direction, int maxX, int maxY) {
+        switch (direction) {
+            case 'N': if (y + 1 <= maxY) 
+                          y++; 
+                      break;
+            case 'E': if (x + 1 <= maxX) 
+                          x++; 
+                      break;
+            case 'S': if (y - 1 >= 0) 
+                          y--; 
+                      break;
+            case 'W': if (x - 1 >= 0) 
+                          x--; 
+                      break;
+        }
+        return new int[] {x, y};
+    }
+}
